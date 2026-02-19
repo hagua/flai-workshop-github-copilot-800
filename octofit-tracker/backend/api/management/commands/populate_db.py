@@ -34,46 +34,48 @@ class Command(BaseCommand):
         # Create Users - Marvel Heroes
         self.stdout.write('Creating Marvel heroes...')
         marvel_users = [
-            {'name': 'Tony Stark', 'email': 'ironman@marvel.com', 'password': 'arc_reactor_3000'},
-            {'name': 'Steve Rogers', 'email': 'captainamerica@marvel.com', 'password': 'shield_bearer'},
-            {'name': 'Thor Odinson', 'email': 'thor@asgard.com', 'password': 'mjolnir_worthy'},
-            {'name': 'Natasha Romanoff', 'email': 'blackwidow@marvel.com', 'password': 'red_ledger'},
-            {'name': 'Bruce Banner', 'email': 'hulk@marvel.com', 'password': 'smash_time'},
-            {'name': 'Peter Parker', 'email': 'spiderman@marvel.com', 'password': 'web_slinger'},
+            {'username': 'ironman', 'name': 'Tony Stark', 'email': 'ironman@marvel.com', 'password': 'arc_reactor_3000'},
+            {'username': 'captainamerica', 'name': 'Steve Rogers', 'email': 'captainamerica@marvel.com', 'password': 'shield_bearer'},
+            {'username': 'thor', 'name': 'Thor Odinson', 'email': 'thor@asgard.com', 'password': 'mjolnir_worthy'},
+            {'username': 'blackwidow', 'name': 'Natasha Romanoff', 'email': 'blackwidow@marvel.com', 'password': 'red_ledger'},
+            {'username': 'hulk', 'name': 'Bruce Banner', 'email': 'hulk@marvel.com', 'password': 'smash_time'},
+            {'username': 'spiderman', 'name': 'Peter Parker', 'email': 'spiderman@marvel.com', 'password': 'web_slinger'},
         ]
         
         marvel_user_objects = []
         for user_data in marvel_users:
             user = User.objects.create(
+                username=user_data['username'],
                 name=user_data['name'],
                 email=user_data['email'],
                 password=user_data['password'],
                 team_id=team_marvel.id
             )
             marvel_user_objects.append(user)
-            self.stdout.write(f'  Created {user.name}')
+            self.stdout.write(f'  Created {user.name} (@{user.username})')
         
         # Create Users - DC Heroes
         self.stdout.write('Creating DC heroes...')
         dc_users = [
-            {'name': 'Clark Kent', 'email': 'superman@dc.com', 'password': 'kryptonite_free'},
-            {'name': 'Bruce Wayne', 'email': 'batman@dc.com', 'password': 'dark_knight'},
-            {'name': 'Diana Prince', 'email': 'wonderwoman@dc.com', 'password': 'lasso_truth'},
-            {'name': 'Barry Allen', 'email': 'flash@dc.com', 'password': 'speed_force'},
-            {'name': 'Arthur Curry', 'email': 'aquaman@dc.com', 'password': 'trident_power'},
-            {'name': 'Hal Jordan', 'email': 'greenlantern@dc.com', 'password': 'will_power'},
+            {'username': 'superman', 'name': 'Clark Kent', 'email': 'superman@dc.com', 'password': 'kryptonite_free'},
+            {'username': 'batman', 'name': 'Bruce Wayne', 'email': 'batman@dc.com', 'password': 'dark_knight'},
+            {'username': 'wonderwoman', 'name': 'Diana Prince', 'email': 'wonderwoman@dc.com', 'password': 'lasso_truth'},
+            {'username': 'flash', 'name': 'Barry Allen', 'email': 'flash@dc.com', 'password': 'speed_force'},
+            {'username': 'aquaman', 'name': 'Arthur Curry', 'email': 'aquaman@dc.com', 'password': 'trident_power'},
+            {'username': 'greenlantern', 'name': 'Hal Jordan', 'email': 'greenlantern@dc.com', 'password': 'will_power'},
         ]
         
         dc_user_objects = []
         for user_data in dc_users:
             user = User.objects.create(
+                username=user_data['username'],
                 name=user_data['name'],
                 email=user_data['email'],
                 password=user_data['password'],
                 team_id=team_dc.id
             )
             dc_user_objects.append(user)
-            self.stdout.write(f'  Created {user.name}')
+            self.stdout.write(f'  Created {user.name} (@{user.username})')
         
         all_users = marvel_user_objects + dc_user_objects
         
