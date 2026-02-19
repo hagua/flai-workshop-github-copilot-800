@@ -25,9 +25,12 @@ function Users() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const baseUrl = getApiUrl();
+        const codespaceName = process.env.REACT_APP_CODESPACE_NAME;
+        const baseUrl = codespaceName
+          ? `https://${codespaceName}-8000.app.github.dev/api`
+          : 'http://localhost:8000/api';
         
-        // Fetch users
+        // Fetch users from: https://${codespaceName}-8000.app.github.dev/api/users/
         const usersResponse = await fetch(`${baseUrl}/users/`);
         if (!usersResponse.ok) {
           throw new Error(`HTTP error! status: ${usersResponse.status}`);
